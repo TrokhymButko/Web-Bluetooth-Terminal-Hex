@@ -1,3 +1,6 @@
+I needed a terminal that would show me BLE packets as bytes in hex. So I took this project and removed the text buffer operation and added hex packet output.
+I also added support for my device (on-board computer of an electric vehicle) to output: speed, current, voltage, distance, power, energy consumption, temperature ... these readings are activated at the top of the terminal when a 20 byte packet arrives with 2 bytes at the beginning " 55 AA" and at the end 1 byte "00".
+
 # Web Bluetooth Terminal
 
 [![NpmVersion](https://img.shields.io/npm/v/web-bluetooth-terminal.svg)](https://www.npmjs.com/package/web-bluetooth-terminal)

@@ -13,7 +13,7 @@ class BluetoothTerminal {
       receiveSeparator = '\n', sendSeparator = '\n') {
     // Used private variables.
     this._receiveBuffer = ''; // Buffer containing not separated data.
-    this._maxCharacteristicValueLength = 20; // Max characteristic value length.
+    this._maxCharacteristicValueLength = 40; // Max characteristic value length.
     this._device = null; // Device object cache.
     this._characteristic = null; // Characteristic object cache.
 
@@ -128,6 +128,9 @@ class BluetoothTerminal {
    * @param {string} data - Data
    */
   receive(data) {
+    // Handle incoming data.
+  }
+  receiveBin(data) {
     // Handle incoming data.
   }
 
@@ -340,27 +343,24 @@ class BluetoothTerminal {
         then((characteristic) => this._startNotifications(characteristic)).
         catch((error) => this._log(error));
   }
-
+      // celoe 16 bit v int so znakom 
+  
   /**
-   * Handle characteristic value changed.
+   * Handle characteristic value changed._____________________________________________________________
    * @param {Object} event
    * @private
    */
   _handleCharacteristicValueChanged(event) {
+    let arr1920 = new Uint8Array(event.target.value.buffer);
     const value = new TextDecoder().decode(event.target.value);
-
-    for (const c of value) {
-      if (c === this._receiveSeparator) {
-        const data = this._receiveBuffer.trim();
-        this._receiveBuffer = '';
-
-        if (data) {
-          this.receive(data);
-        }
-      } else {
-        this._receiveBuffer += c;
-      }
+    // const value = "V = " + (arr1920[2] * 256 + arr1920[3]);
+    // console.log (arr1920);
+    
+    if (arr1920.length == 20) {
+      this.receiveBin(arr1920);
     }
+    this.receive(arToHex(arr1920));
+   
   }
 
   /**

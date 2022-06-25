@@ -1,6 +1,19 @@
-I needed a terminal that would show me BLE packets as bytes in hex. So I took this project and removed the text buffer operation and added hex packet output.
+## Changes from fork TrokhymButko:
+1. Now the terminal displays packets in hexadecimal form.
+2. To the right of the hexadecimal output, there is a character output.
+3. Added implicit support for outputting data from my electric vehicle on-board computer.
+
+## Explanation:
+I needed a terminal that would show me BLE packets as bytes in hex. 
+So I took this project and removed the text buffer operation and added hex packet output.
+
 I also added support for my device (on-board computer of an electric vehicle) to output: speed, current, voltage, distance, power, energy consumption, temperature ... these readings are activated at the top of the terminal when a 20 byte packet arrives with 2 bytes at the beginning " 55 AA" and at the end 1 byte "00".
 ![Screenshot_2.jpg](Screenshot_2.jpg?raw=true "Screenshot")
+
+In the future, based on this project, I hope to make a beautiful dashboard for electric vehicles.
+
+The description of my fork is finished, next is the description of the original branch
+
 
 # Web Bluetooth Terminal
 
